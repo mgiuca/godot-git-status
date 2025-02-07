@@ -45,7 +45,7 @@ func read_status_from_git() -> Info:
   var output : Array
   # Use git show-ref to get the hash.
   var exit_code : int = \
-    OS.execute('git', ['show-ref', '--head', 'HEAD', '--hash'], output)
+    OS.execute('git', ['show-ref', '--heads', '--hash'], output)
 
   if exit_code == 127:
     push_warning('GitStatus: git not found')
