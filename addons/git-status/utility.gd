@@ -43,15 +43,15 @@ func get_status() -> Info:
 func read_status_from_git() -> Info:
   var info : Info = Info.new()
   var output : Array
-  # Use git show-ref to get the hash.
+  # Use git rev-parse to get the hash.
   var exit_code : int = \
-    OS.execute('git', ['show-ref', '--heads', '--hash'], output)
+    OS.execute('git', ['rev-parse', 'HEAD'], output)
 
   if exit_code == 127:
     push_warning('GitStatus: git not found')
     return info
   elif exit_code != 0:
-    push_warning('GitStatus: git show-ref failed with code %d' % exit_code)
+    push_warning('GitStatus: git rev-parse failed with code %d' % exit_code)
     return info
 
   if output.size() == 0 or output[0] is not String:
