@@ -13,6 +13,6 @@ func _export_begin(features: PackedStringArray, is_debug: bool, path: String, fl
     print('Exporting with git hash: %s%s' %
           [git_status.hash, '+changes' if git_status.modified else ''])
     var json_text = git_status.to_json()
-    add_file('res://git-status.txt', json_text.to_ascii_buffer(), false)
+    add_file(gs_script.EXPORT_FILENAME, json_text.to_ascii_buffer(), false)
   else:
     print('Exporting without git hash')

@@ -1,5 +1,7 @@
 extends Node
 
+const EXPORT_FILENAME := 'res://git-status.txt'
+
 ## Information about the current git working tree.
 class Info:
   ## The hash of the HEAD revision in the git tree. Empty if missing.
@@ -31,7 +33,7 @@ func get_status() -> Info:
     return read_status_from_git()
   else:
     # Exported - read from the file.
-    var file = FileAccess.open('res://git-status.txt', FileAccess.READ)
+    var file = FileAccess.open(EXPORT_FILENAME, FileAccess.READ)
     if file == null:
       return Info.new()
     return Info.from_json(file.get_as_text())
