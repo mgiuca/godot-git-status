@@ -1,4 +1,5 @@
-extends Node
+class_name GitStatus
+extends Object
 
 const EXPORT_FILENAME := 'res://.git_status.json'
 
@@ -27,7 +28,7 @@ class Info:
 ## - In the editor, calls read_hash_from_git() to get the real git hash from
 ##   the current working directory.
 ## - In an exported project, reads the hash that was saved during export.
-func get_status() -> Info:
+static func get_status() -> Info:
   if OS.has_feature('editor'):
     # In-editor - get from the git shell command.
     return read_status_from_git()

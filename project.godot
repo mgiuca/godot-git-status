@@ -15,10 +15,6 @@ config/version="0.1"
 run/main_scene="uid://b2o4mwj5mi4o0"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
-[autoload]
-
-GitStatus="*uid://d1w4smnb3hw1r"
-
 [display]
 
 window/stretch/mode="canvas_items"

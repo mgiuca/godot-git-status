@@ -1,18 +1,16 @@
 @tool
 extends EditorExportPlugin
 
-const gs_script := preload('git_status.gd')
-
 func _get_name() -> String:
   return 'GitStatus'
 
 func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
-  var git_status : gs_script.Info
-  git_status = gs_script.read_status_from_git()
+  var git_status : GitStatus.Info
+  git_status = GitStatus.read_status_from_git()
   if git_status.hash.length() > 0:
     print('Exporting with git hash: %s%s' %
           [git_status.hash, '+changes' if git_status.modified else ''])
     var json_text = git_status.to_json()
-    add_file(gs_script.EXPORT_FILENAME, json_text.to_ascii_buffer(), false)
+    add_file(GitStatus.EXPORT_FILENAME, json_text.to_ascii_buffer(), false)
   else:
     print('Exporting without git hash')
