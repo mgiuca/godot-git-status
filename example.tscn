@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b2o4mwj5mi4o0"]
+
+[ext_resource type="Script" uid="uid://t3ach78yn7mo" path="res://example.gd" id="1_2jas5"]
+
+[node name="Example" type="Control" unique_id=322210282]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2jas5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1726740907]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LblVersion" type="Label" parent="VBoxContainer" unique_id=936070794]
+layout_mode = 2
+text = "Version number:"
+
+[node name="LblGitHash" type="Label" parent="VBoxContainer" unique_id=1508075993]
+layout_mode = 2
+text = "Git hash:"
