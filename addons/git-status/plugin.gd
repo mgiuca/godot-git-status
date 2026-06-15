@@ -10,7 +10,7 @@ func _enter_tree() -> void:
   add_export_plugin(export_plugin)
 
   # Make the GitStatus singleton available.
-  add_autoload_singleton(AUTOLOAD_NAME, 'utility.gd')
+  add_autoload_singleton(AUTOLOAD_NAME, 'git_status.gd')
 
 func _exit_tree() -> void:
   remove_export_plugin(export_plugin)
