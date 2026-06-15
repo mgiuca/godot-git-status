@@ -40,7 +40,7 @@ func get_status() -> Info:
 ## current directory. WARNING: Do not use this from within a game, as it
 ## directly calls git (which won't work on end-user machines). Instead, use
 ## get_hash() which uses the hash saved during the export.
-func read_status_from_git() -> Info:
+static func read_status_from_git() -> Info:
   var info : Info = Info.new()
   var output : Array
   # Use git rev-parse to get the hash.
