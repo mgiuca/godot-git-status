@@ -39,7 +39,7 @@ class Info:
 static func get_status() -> Info:
   if OS.has_feature('editor'):
     # In-editor - get from the git shell command.
-    return read_status_from_git()
+    return _read_status_from_git()
   else:
     # Exported - read from the file.
     var file = FileAccess.open(EXPORT_FILENAME, FileAccess.READ)
@@ -53,7 +53,7 @@ static func get_status() -> Info:
 ## [b]WARNING[/b]: Do not use this from within a game, as it directly calls the
 ## [code]git[/code] command (which won't work on end-user machines). Instead,
 ## use [method get_hash] which uses the hash saved during the export.
-static func read_status_from_git() -> Info:
+static func _read_status_from_git() -> Info:
   var info : Info = Info.new()
   var output : Array
   # Use git rev-parse to get the hash.
