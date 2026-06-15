@@ -1,6 +1,6 @@
 extends Node
 
-const EXPORT_FILENAME := 'res://git-status.txt'
+const EXPORT_FILENAME := 'res://.git_status.json'
 
 ## Information about the current git working tree.
 class Info:
