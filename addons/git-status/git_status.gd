@@ -47,6 +47,23 @@ static func get_status() -> Info:
       return Info.new()
     return Info.from_json(file.get_as_text())
 
+## Helper function, wrapping [method get_status]. Returns a user-readable
+## string of the short git hash, plus whether any changes were made.[br]
+## [br]
+## If there are uncommitted changes in the repository, appends
+## [code]"+changes"[/code] to the end of the hash. If git status is missing,
+## returns [code]"(no git)"[/code].
+static func get_hash_string() -> String:
+  var git_status : Info = get_status()
+
+  if git_status.hash == '':
+    return '(no git)'
+  else:
+    var git_hash := git_status.hash.substr(0, 8)
+    if git_status.modified:
+      git_hash += '+changes'
+    return git_hash
+
 ## Gets the current git hash from running the system [code]git[/code] command in
 ## the project directory.[br]
 ## [br]
