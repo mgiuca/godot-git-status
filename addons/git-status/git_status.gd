@@ -1,3 +1,8 @@
+## Utility to get information about the current project's git status.
+##
+## Provides the [method get_status] API to return git status, which reflects
+## the live git repo status when running in the editor, and the git status
+## at export time, when running an exported build.
 class_name GitStatus
 extends Object
 
@@ -11,10 +16,12 @@ class Info:
   ## committed.
   var modified : bool
 
+  ## Converts the info to a JSON string for storage.
   func to_json() -> String:
     var dict = {'hash': hash, 'modified': modified}
     return JSON.stringify(dict, '  ')
 
+  ## Loads a JSON string into an [Info] object.
   static func from_json(json: String) -> Info:
     var info : Info = Info.new()
     var dict : Dictionary = JSON.parse_string(json)
@@ -22,11 +29,12 @@ class Info:
     info.modified = dict.get('modified', false)
     return info
 
-## Gets the current git hash.
+## Gets the current git hash.[br]
+## [br]
 ## Behaviour varies depending on whether the project was exported or is running
-## in the editor:
-## - In the editor, calls read_hash_from_git() to get the real git hash from
-##   the current working directory.
+## in the editor:[br]
+## - In the editor, gets the real git hash from the current working directory,
+## assuming it is inside a git repository.[br]
 ## - In an exported project, reads the hash that was saved during export.
 static func get_status() -> Info:
   if OS.has_feature('editor'):
@@ -39,10 +47,12 @@ static func get_status() -> Info:
       return Info.new()
     return Info.from_json(file.get_as_text())
 
-## Gets the current git hash from running the system "git" command in the
-## current directory. WARNING: Do not use this from within a game, as it
-## directly calls git (which won't work on end-user machines). Instead, use
-## get_hash() which uses the hash saved during the export.
+## Gets the current git hash from running the system [code]git[/code] command in
+## the project directory.[br]
+## [br]
+## [b]WARNING[/b]: Do not use this from within a game, as it directly calls the
+## [code]git[/code] command (which won't work on end-user machines). Instead,
+## use [method get_hash] which uses the hash saved during the export.
 static func read_status_from_git() -> Info:
   var info : Info = Info.new()
   var output : Array
